@@ -1,0 +1,17 @@
+{
+  "name": "massattack",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "watch": "npx shadow-cljs watch game",
+    "release": "npx shadow-cljs release game",
+    "bundle": "npm run release && cd public && zip game.zip index.html js/main.js sounds/* && mv game.zip ..",
+    "push": "npm run release && npm run push-only",
+    "push-only": "rm -rf public/js/cljs-runtime public/js/manifest.edn && butler push public verma/massattack:dev",
+    "push-source": "butler push . verma/massattack:source --ignore node_modules --ignore game.zip --ignore .clj-kondo --ignore .lsp --ignore .shadow-cljs"
+  },
+  "devDependencies": {
+    "howler": "^2.2.3",
+    "shadow-cljs": "1.15.12"
+  }
+}
